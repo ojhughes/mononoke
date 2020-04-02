@@ -1,0 +1,10 @@
+#cloud-config
+ssh_authorized_keys:
+  - ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC729B8957qOAYMtFFS11NSseJoQ0oxLc0eC9ucKGxZYxl8IMdjFH9bHmlFudjAq2Voefl3gQF549TowZHVpDDYtinugcWSpnQQFTQgGYMi3hXA/3zXImEocPO9DTfhEPGO/5RQjpKbeyjPRYlxu6D2nFuI1mGy0hRirRLn4TbCbG8SSiuuhcIxT86erx0qYHNRqL6wehfPWyPOYbbakPyfCohIodDlgLZUtpv3lc8DJN5P6mUrBZMq0VKTLA+mzbZM0qMp4rilB/uukQNdz7WzNoKjJdz051ZK0D6QoptOF9WDn7K7uAe+77TmJwLGlTUdhhr6Vfk78mEQy2gunlgB ohughes@ollie-imac.local
+
+runcmd:
+- curl -SLsf https://get.k3sup.dev | sh
+- mkdir -p /home/ubuntu/.kube/
+- k3sup install --local --local-path /home/ubuntu/.kube/config
+- echo "export KUBECONFIG=/home/ubuntu/.kube/config" | tee -a /home/ubuntu/.bashrc
+- chown ubuntu:ubuntu -R /home/ubuntu/
